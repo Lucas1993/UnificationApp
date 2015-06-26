@@ -1,0 +1,41 @@
+<% provide(:title, "Interpreter") %>
+
+<div style="width: 100%; overflow: hidden;">
+	<div style="width: 600px; float: left;"> 
+		<h1>Interpreter</h1>
+		<p>
+		This is the home page for the
+		<a href="http://www.railstutorial.org/">Ruby on Rails Tutorial</a>
+		sample application.
+		</p>
+
+		<form id="problem_form" action="/pages/handle_unification" method="POST">
+			<%= text_area(:problem, :text, cols: 75, rows: 10) %>
+			<input type="button" value="Run unification" id="submit_button" class="button" />
+		</form>
+	</div>
+
+	<div style="margin-left: 620px;"> 
+		<h1>Resultados</h1>
+		<p id="loko">loko</p>
+   	</div>
+</div>
+
+<script src="/assets/application.js"></script>
+
+
+<script>
+$('#submit_button').click(function() {  
+	var valuesToSubmit = $("#problem_text").serialize();
+	console.log(valuesToSubmit);
+	$.ajax({
+		type: "POST",
+		url: $("#problem_form").attr('action'), //sumbits it to the given url of the form
+		data: valuesToSubmit,
+		dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+	}).success(function(json){
+		$("#loko").val("teste");
+		console.log("novo", json);
+	});
+});
+</script>
