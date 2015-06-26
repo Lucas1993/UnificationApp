@@ -4,20 +4,18 @@
 	<div style="width: 600px; float: left;"> 
 		<h1>Interpreter</h1>
 		<p>
-		This is the home page for the
-		<a href="http://www.railstutorial.org/">Ruby on Rails Tutorial</a>
-		sample application.
+		Web interface for a unification algorithm
 		</p>
 
 		<form id="problem_form" action="/pages/handle_unification" method="POST">
-			<%= text_area(:problem, :text, cols: 75, rows: 10) %>
-			<input type="button" value="Run unification" id="submit_button" class="button" />
+			<%= text_area(:problem, :text, cols: 75, rows: 20, style: "position: absolute; resize: none") %>
+			<input type="button" style="position: absolute; top: 620px" value="Run unification" id="submit_button" class="button" />
 		</form>
 	</div>
 
 	<div style="margin-left: 620px;"> 
-		<h1>Resultados</h1>
-		<p id="loko">loko</p>
+		<h1>Results</h1>
+		<div id="loko">loko</div>
    	</div>
 </div>
 
@@ -34,7 +32,7 @@ $('#submit_button').click(function() {
 		data: valuesToSubmit,
 		dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
 	}).success(function(json){
-		$("#loko").val("teste");
+		$("#loko").text(json["message"]);
 		console.log("novo", json);
 	});
 });
