@@ -8,6 +8,7 @@ module RUNIFY
 		RPAREN = /\)/
 		COMMA = /,/
 		EQUAL = /=/
+		WHITESPACE = /(\ |\t)+/
 		SEPARATOR = /(\r|\n)+/
 		#SEPARATOR = /;/
 
@@ -16,20 +17,22 @@ module RUNIFY
 		end
 
 		def next_token
-			return if @ss.eos?
+			loop do 
+				return if @ss.eos?
 
-			case 
-			when text = @ss.scan(STRING) then [:STRING, text]
-			when text = @ss.scan(LPAREN) then [:LPAREN, text]
-			when text = @ss.scan(RPAREN) then [:RPAREN, text]
-			when text = @ss.scan(COMMA) then [:COMMA, text]
-			when text = @ss.scan(SEPARATOR) then [:SEPARATOR, text]
-			when text = @ss.scan(EQUAL) then [:EQUAL, text]
-			else
-				x = @ss.getch
-				[x,x]
-			end
-			
+				case 
+				when text = @ss.scan(STRING) then return [:STRING, text]
+				when text = @ss.scan(LPAREN) then return [:LPAREN, text]
+				when text = @ss.scan(RPAREN) then return [:RPAREN, text]
+				when text = @ss.scan(COMMA) then return [:COMMA, text]
+				when text = @ss.scan(EQUAL) then return [:EQUAL, text]
+				when text = @ss.scan(SEPARATOR) then return [:SEPARATOR, text]
+				when text = @ss.scan(WHITESPACE) then next
+				else
+					x = @ss.getch
+					return [x,x]
+				end
+			end 
 		end
 	end
 end

@@ -4,7 +4,9 @@ rule
 	problem_set : equations { val[0] };
 	equations 
 			: equation { result = [val[0]] }
-			| equation SEPARATOR equations { result = val[0] << val[2] };
+			| equation seps equations { result = val[0] << val[2] };
+
+	seps : SEPARATOR seps | SEPARATOR;
 
 	equation : term EQUAL term { result = [val[0], val[2]] };
 

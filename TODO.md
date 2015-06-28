@@ -4,7 +4,6 @@ TODO
 RUNIF
 -----
 
-- Handle whitespaces
 - Handle error cases
 - Implement the unification algorithm
 - Pack as a gem/lib

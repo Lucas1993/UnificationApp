@@ -8,7 +8,7 @@ require 'racc/parser.rb'
 module RUNIFY
   class Parser < Racc::Parser
 
-module_eval(<<'...end Parser.y/module_eval...', 'Parser.y', 29)
+module_eval(<<'...end Parser.y/module_eval...', 'Parser.y', 31)
 
 	def initialize tokenizer
 		@tokenizer = tokenizer
@@ -26,54 +26,56 @@ module_eval(<<'...end Parser.y/module_eval...', 'Parser.y', 29)
 ##### State transition tables begin ###
 
 racc_action_table = [
-     7,     9,    10,    11,    12,    13,     7,     7,     7,    18,
-    19,     7 ]
+     7,     9,    11,    12,    13,    14,     7,    11,     7,     7,
+    20,    21,     7 ]
 
 racc_action_check = [
-     0,     1,     3,     4,     8,     9,    10,    11,    12,    16,
-    17,    19 ]
+     0,     1,     3,     4,     8,     9,    10,    11,    12,    13,
+    18,    19,    21 ]
 
 racc_action_pointer = [
     -2,     1,   nil,    -5,    -2,   nil,   nil,   nil,     1,     5,
-     4,     5,     6,   nil,   nil,   nil,     5,     4,   nil,     9,
-   nil ]
+     4,     0,     6,     7,   nil,   nil,   nil,   nil,     6,     5,
+   nil,    10,   nil ]
 
 racc_action_default = [
-   -12,   -12,    -1,    -2,   -12,    -5,    -6,    -7,    -8,   -12,
-   -12,   -12,   -12,    21,    -3,    -4,   -12,   -10,    -9,   -12,
-   -11 ]
+   -14,   -14,    -1,    -2,   -14,    -7,    -8,    -9,   -10,   -14,
+   -14,    -5,   -14,   -14,    23,    -3,    -4,    -6,   -14,   -12,
+   -11,   -14,   -13 ]
 
 racc_goto_table = [
-     2,    15,    17,     1,    16,   nil,   nil,   nil,   nil,    17,
-    14,    20 ]
+     2,    10,    17,    19,    18,     1,   nil,   nil,   nil,    16,
+    15,    19,    22 ]
 
 racc_goto_check = [
-     2,     4,     4,     1,     8,   nil,   nil,   nil,   nil,     4,
-     2,     8 ]
+     2,     4,     5,     5,     9,     1,   nil,   nil,   nil,     4,
+     2,     5,     9 ]
 
 racc_goto_pointer = [
-   nil,     3,     0,   nil,   -10,   nil,   nil,   nil,    -8 ]
+   nil,     5,     0,   nil,    -2,   -10,   nil,   nil,   nil,    -9 ]
 
 racc_goto_default = [
-   nil,   nil,   nil,     3,     4,     5,     6,     8,   nil ]
+   nil,   nil,   nil,     3,   nil,     4,     5,     6,     8,   nil ]
 
 racc_reduce_table = [
   0, 0, :racc_error,
   1, 9, :_reduce_1,
   1, 10, :_reduce_2,
   3, 10, :_reduce_3,
-  3, 11, :_reduce_4,
-  1, 12, :_reduce_5,
-  1, 12, :_reduce_6,
-  1, 15, :_reduce_none,
+  2, 12, :_reduce_none,
+  1, 12, :_reduce_none,
+  3, 11, :_reduce_6,
+  1, 13, :_reduce_7,
   1, 13, :_reduce_8,
-  4, 14, :_reduce_9,
-  1, 16, :_reduce_10,
-  3, 16, :_reduce_11 ]
+  1, 16, :_reduce_none,
+  1, 14, :_reduce_10,
+  4, 15, :_reduce_11,
+  1, 17, :_reduce_12,
+  3, 17, :_reduce_13 ]
 
-racc_reduce_n = 12
+racc_reduce_n = 14
 
-racc_shift_n = 21
+racc_shift_n = 23
 
 racc_token_table = {
   false => 0,
@@ -118,6 +120,7 @@ Racc_token_to_s_table = [
   "problem_set",
   "equations",
   "equation",
+  "seps",
   "term",
   "var",
   "fun",
@@ -151,52 +154,56 @@ module_eval(<<'.,.,', 'Parser.y', 6)
   end
 .,.,
 
-module_eval(<<'.,.,', 'Parser.y', 8)
-  def _reduce_4(val, _values, result)
+# reduce 4 omitted
+
+# reduce 5 omitted
+
+module_eval(<<'.,.,', 'Parser.y', 10)
+  def _reduce_6(val, _values, result)
      result = [val[0], val[2]] 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'Parser.y', 11)
-  def _reduce_5(val, _values, result)
+module_eval(<<'.,.,', 'Parser.y', 13)
+  def _reduce_7(val, _values, result)
     result = val[0]
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'Parser.y', 12)
-  def _reduce_6(val, _values, result)
-    result = val[0]
-    result
-  end
-.,.,
-
-# reduce 7 omitted
-
-module_eval(<<'.,.,', 'Parser.y', 17)
+module_eval(<<'.,.,', 'Parser.y', 14)
   def _reduce_8(val, _values, result)
+    result = val[0]
+    result
+  end
+.,.,
+
+# reduce 9 omitted
+
+module_eval(<<'.,.,', 'Parser.y', 19)
+  def _reduce_10(val, _values, result)
      result = VTerm.new(val[0]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'Parser.y', 19)
-  def _reduce_9(val, _values, result)
+module_eval(<<'.,.,', 'Parser.y', 21)
+  def _reduce_11(val, _values, result)
      result = FTerm.new(val[0], val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'Parser.y', 22)
-  def _reduce_10(val, _values, result)
+module_eval(<<'.,.,', 'Parser.y', 24)
+  def _reduce_12(val, _values, result)
      result = [val[0]] 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'Parser.y', 23)
-  def _reduce_11(val, _values, result)
+module_eval(<<'.,.,', 'Parser.y', 25)
+  def _reduce_13(val, _values, result)
      result = [val[0]] + val[2] 
     result
   end
