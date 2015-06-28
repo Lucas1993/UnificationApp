@@ -1,13 +1,15 @@
-module Tokenizer
+module RUNIFY
 	require 'strscan'
 	require 'stringio'
+
 	class Tokenizer
-		NAME = /[a-zA-Z]/
-		NUMBER = /[0-9]/
+		STRING = /[a-zA-Z]/
 		LPAREN = /\(/
 		RPAREN = /\)/
+		COMMA = /,/
 		EQUAL = /=/
-		
+		SEPARATOR = /(\r|\n)+/
+		#SEPARATOR = /;/
 
 		def initialize io
 			@ss = StringScanner.new io.read 
@@ -17,10 +19,11 @@ module Tokenizer
 			return if @ss.eos?
 
 			case 
-			when text = @ss.scan(NAME) then [:NAME, text]
-			when text = @ss.scan(NUMBER) then [:NUMBER, text]
+			when text = @ss.scan(STRING) then [:STRING, text]
 			when text = @ss.scan(LPAREN) then [:LPAREN, text]
 			when text = @ss.scan(RPAREN) then [:RPAREN, text]
+			when text = @ss.scan(COMMA) then [:COMMA, text]
+			when text = @ss.scan(SEPARATOR) then [:SEPARATOR, text]
 			when text = @ss.scan(EQUAL) then [:EQUAL, text]
 			else
 				x = @ss.getch
