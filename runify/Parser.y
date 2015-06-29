@@ -4,7 +4,7 @@ rule
 	problem_set : equations { val[0] };
 	equations 
 			: equation { result = [val[0]] }
-			| equation seps equations { result = val[0] << val[2] };
+			| equation seps equations { result = val[2].unshift(val[0]) };
 
 	seps : SEPARATOR seps | SEPARATOR;
 
@@ -38,7 +38,7 @@ end
 		@tokenizer.next_token
 	end
 
-	def parse
+	def parse!
 		do_parse
 	end
 

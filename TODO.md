@@ -1,7 +1,7 @@
 TODO
 ====
 
-RUNIF
+RUNIFY
 -----
 
 - Handle error cases
@@ -15,3 +15,4 @@ WEB
 - Connect server and the unification module
 - Pretty print results
 - Line number on input?
+- Find proper way of handling elements positioning

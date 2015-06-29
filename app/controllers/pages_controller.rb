@@ -12,9 +12,18 @@ class PagesController < ApplicationController
 
 	def handle_unification
 		data = params[:problem][:text]
+		resp = data
+		unifier = RUNIFY::UnificationHandler.new
+		unifier.load!(data)
+		success = unifier.interpret!
+		if success
+			resp = unifier.results
+		else
+			resp = unifier.error_log
+		end
 		respond_to do |format|
-			msg = { :status => "ok", :message => data , :html => "<b>...</b>" }
-			format.json  { render :json => msg } # don't do msg.to_json
+			msg = { :status => "ok", :message => resp , :html => "<b>...</b>" }
+			format.json  { render :json => msg }
 		end 
 	end
 end

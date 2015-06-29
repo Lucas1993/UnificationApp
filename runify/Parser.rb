@@ -19,7 +19,7 @@ module_eval(<<'...end Parser.y/module_eval...', 'Parser.y', 31)
 		@tokenizer.next_token
 	end
 
-	def parse
+	def parse!
 		do_parse
 	end
 ...end Parser.y/module_eval...
@@ -149,7 +149,7 @@ module_eval(<<'.,.,', 'Parser.y', 5)
 
 module_eval(<<'.,.,', 'Parser.y', 6)
   def _reduce_3(val, _values, result)
-     result = val[0] << val[2] 
+     result = val[2].unshift(val[0]) 
     result
   end
 .,.,
