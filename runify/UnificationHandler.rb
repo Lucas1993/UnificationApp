@@ -11,7 +11,8 @@ module RUNIFY
 		end
 
 		def load! str
-			tok     = RUNIFY::Tokenizer.new str
+			io_str = StringIO.new str
+			tok     = RUNIFY::Tokenizer.new io_str
 			@parser  = RUNIFY::Parser.new tok
 			return
 		end
@@ -25,6 +26,13 @@ module RUNIFY
 					return true
 				rescue ParseError => error_msg
 					@error_log = error_msg
+					puts @error_log
+					@error_log = "Syntax Error!"
+					return false
+				rescue RUNIFY::UnificationError => error_msg
+					@error_log = error_msg
+					puts @error_log
+					@error_log = "Unification failure"
 					return false
 				end
 			end

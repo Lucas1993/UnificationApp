@@ -15,7 +15,7 @@
 
 	<div style="margin-left: 620px;"> 
 		<h1>Results</h1>
-		<div id="loko">loko</div>
+		<div id="result">Enter unificaation problem.</div>
    	</div>
 </div>
 
@@ -32,8 +32,7 @@ $('#submit_button').click(function() {
 		data: valuesToSubmit,
 		dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
 	}).success(function(json){
-		$("#loko").text(json["message"]);
-		console.log("novo", json);
+		$("#result").text(json["message"]);
 	});
 });
 </script>

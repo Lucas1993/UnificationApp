@@ -3,7 +3,8 @@ module RUNIFY
 	require 'stringio'
 
 	class Tokenizer
-		STRING = /[a-zA-Z]/
+		VAR_STRING = /[A-Z]([a-zA-Z])*/
+		SYM_STRING = /[a-z]([a-zA-Z])*/
 		LPAREN = /\(/
 		RPAREN = /\)/
 		COMMA = /,/
@@ -21,7 +22,8 @@ module RUNIFY
 				return if @ss.eos?
 
 				case 
-				when text = @ss.scan(STRING) then return [:STRING, text]
+				when text = @ss.scan(VAR_STRING) then return [:VAR_STRING, text]
+				when text = @ss.scan(SYM_STRING) then return [:SYM_STRING, text]
 				when text = @ss.scan(LPAREN) then return [:LPAREN, text]
 				when text = @ss.scan(RPAREN) then return [:RPAREN, text]
 				when text = @ss.scan(COMMA) then return [:COMMA, text]

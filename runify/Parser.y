@@ -1,5 +1,5 @@
 class RUNIFY::Parser
-token STRING LPAREN RPAREN EQUAL COMMA SEPARATOR
+token VAR_STRING SYM_STRING LPAREN RPAREN EQUAL COMMA SEPARATOR
 rule
 	problem_set : equations { val[0] };
 	equations 
@@ -15,11 +15,12 @@ rule
 		| fun {result = val[0]}
 		;
 
-	label : STRING;
 
-	var : label { result = VTerm.new(val[0]) };
+	var : VAR_STRING { result = VTerm.new(val[0]) };
 
-	fun : label LPAREN args RPAREN { result = FTerm.new(val[0], val[2]) }
+	fun 
+		: SYM_STRING LPAREN args RPAREN { result = FTerm.new(val[0], val[2]) }
+		| SYM_STRING { result = FTerm.new(val[0]) }
 
 	args 
 		: term { result = [val[0]] }

@@ -1,4 +1,7 @@
 module RUNIFY
+	class UnificationError < StandardError
+	end
+
 	class Unification
 		def initialize 
 			@unifier = {}
@@ -15,8 +18,6 @@ module RUNIFY
 			@unifier.clear
 		end
 
-		class UnificationError < StandardError
-		end
 
 		private
 			
@@ -28,9 +29,9 @@ module RUNIFY
 					s = substitute s, @unifier
 				end
 
-				if t.is_a? VTerm then
-					t = substitute t, @unifier
-				end
+				# Always replace t. This is equivalent to update
+				# all right handside of the equations on every unification
+				t = substitute t, @unifier
 
 
 				if t.is_a? VTerm and s.is_a? VTerm and s.label == t.label then
@@ -75,11 +76,6 @@ module RUNIFY
 				@unifier.each do |x, t|
 					@unifier[x] = substitute t, mapping
 				end
-				#@unifier.each do |x, t|
-					#if x.label == t.label and t.is_a? VTerm then
-						#@unifier.delete x
-					#end
-				#end
 				@unifier.merge! mapping
 
 			end
