@@ -35,5 +35,6 @@ group :development, :test do
 end
 
 
+gem 'thin'
 gem 'jquery-rails'
 gem 'haml', '>= 3.0.0'
