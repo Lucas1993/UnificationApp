@@ -10,7 +10,7 @@ RUNIFY
 WEB
 ---
 
-- Handle concurrent requests
-- Pretty print results
+- Help page on syntax
+- About page
 - Line number on input?
 - Find proper way of handling elements positioning

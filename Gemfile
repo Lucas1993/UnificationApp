@@ -34,6 +34,8 @@ group :development, :test do
   gem 'spring'
 end
 
+gem 'runify', git: 'https://github.com/Lucas1993/RUnify.git'
+
 
 gem 'thin'
 gem 'jquery-rails'

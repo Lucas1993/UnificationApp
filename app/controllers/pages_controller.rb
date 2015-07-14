@@ -1,8 +1,6 @@
 class PagesController < ApplicationController
 	skip_before_action :verify_authenticity_token, :only => [:handle_unification]
 
-	require '~/code/pibic/UnificationApp/runify'
-
 	def home
 	end
 
