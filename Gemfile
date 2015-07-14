@@ -40,3 +40,4 @@ gem 'runify', git: 'https://github.com/Lucas1993/RUnify.git'
 gem 'thin'
 gem 'jquery-rails'
 gem 'haml', '>= 3.0.0'
+ruby "2.2.0"
